@@ -762,5 +762,24 @@ export default function Chatbot({ config, apiUrl, isOpen, onToggle }) {
         </div>
       )}
     </>
+    <style>
+      {`
+        @keyframes pulse-glow {
+          0% {
+            box-shadow: 0 0 0 0 rgba(30, 86, 49, 0.7);
+            transform: scale(1);
+          }
+          50% {
+            box-shadow: 0 0 20px 10px rgba(30, 86, 49, 0.4);
+            transform: scale(1.05);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(30, 86, 49, 0);
+            transform: scale(1);
+          }
+        }
+      `}
+    </style>
+    </>
   );
 }

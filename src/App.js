@@ -124,14 +124,16 @@ function App() {
   const { trackEvent } = useAnalytics();
 
   useEffect(() => {
-    // Auto-open chatbot after 4 seconds delay
-    const chatTimer = setTimeout(() => {
-      setChatOpen(true);
-      trackEvent('chatbot_auto_opened', {});
-    }, 4000);
+    // Scroll to About section on page load for better first impression
+    const scrollTimer = setTimeout(() => {
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500);
     
-    return () => clearTimeout(chatTimer);
-  }, [trackEvent]);
+    return () => clearTimeout(scrollTimer);
+  }, []);
 
   useEffect(() => {
     // Try to fetch settings from admin panel
