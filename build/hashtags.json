@@ -1,0 +1,100 @@
+{
+  "general": [
+    "#TrittonRoadPharmacy",
+    "#LincolnPharmacy",
+    "#NHSPharmacy",
+    "#LincolnHealthcare",
+    "#Lincolnshire",
+    "#LincolnUK",
+    "#CommunityPharmacy",
+    "#YourLocalPharmacy",
+    "#PharmacyFirst",
+    "#NHSLincoln",
+    "#HealthcareLincoln",
+    "#LincolnHealth"
+  ],
+  "services": {
+    "flu": [
+      "#FluJab",
+      "#FluVaccine",
+      "#WinterHealth",
+      "#GetYourFluJab",
+      "#ProtectYourself"
+    ],
+    "pharmacy-first": [
+      "#PharmacyFirst",
+      "#NHSPharmacyFirst",
+      "#NoGPNeeded",
+      "#MinorIllness",
+      "#FreeNHSService"
+    ],
+    "prescription": [
+      "#Prescriptions",
+      "#RepeatPrescription",
+      "#PrescriptionCollection",
+      "#NHSPrescription"
+    ],
+    "blood-pressure": [
+      "#BloodPressure",
+      "#BPCheck",
+      "#HeartHealth",
+      "#FreeHealthCheck",
+      "#KnowYourNumbers"
+    ],
+    "contraception": [
+      "#Contraception",
+      "#ReproductiveHealth",
+      "#WomensHealth",
+      "#FreeContraception"
+    ],
+    "health-advice": [
+      "#HealthAdvice",
+      "#AskYourPharmacist",
+      "#PharmacyAdvice",
+      "#HealthTips"
+    ],
+    "emergency": [
+      "#EmergencyMedicine",
+      "#UrgentPrescription",
+      "#PharmacyHelp"
+    ]
+  },
+  "locations": [
+    "#Lincoln",
+    "#Lincolnshire",
+    "#NorthHykeham",
+    "#Waddington",
+    "#BracebridgeHeath",
+    "#Skellingthorpe",
+    "#Nettleham",
+    "#Saxilby",
+    "#CherryWillingham",
+    "#Washingborough",
+    "#WoodhallSpa",
+    "#LN6"
+  ],
+  "seasonal": {
+    "winter": [
+      "#WinterHealth",
+      "#StayWellThisWinter",
+      "#ColdAndFlu",
+      "#WinterReady"
+    ],
+    "summer": [
+      "#SummerHealth",
+      "#HayFever",
+      "#TravelHealth",
+      "#SunSafety"
+    ],
+    "backToSchool": [
+      "#BackToSchool",
+      "#SchoolHealth",
+      "#ChildrensHealth"
+    ],
+    "christmas": [
+      "#ChristmasOpening",
+      "#FestiveHealth",
+      "#HolidayPharmacy"
+    ]
+  }
+}

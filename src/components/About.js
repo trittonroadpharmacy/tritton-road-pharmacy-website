@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Users, Clock, ShieldCheck, MapPin, Phone, ArrowRight } from 'lucide-react';
+import { Heart, Users, Clock, ShieldCheck, MapPin, Phone } from 'lucide-react';
 
 export default function About({ config }) {
   const getTodayHours = () => {
