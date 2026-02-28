@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import CookieConsent from './components/CookieConsent';
+import ReviewTicker from './components/ReviewTicker';
 import useAnalytics from './hooks/useAnalytics';
 
 // API URL for backend services (PharmAdPro backend)
@@ -92,6 +93,7 @@ function PageTracker({ trackEvent }) {
 function HomePage({ config, chatOpen, setChatOpen, trackEvent }) {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
+      <ReviewTicker />
       <Header config={config} />
       <Hero config={config} trackEvent={trackEvent} />
       <About config={config} />

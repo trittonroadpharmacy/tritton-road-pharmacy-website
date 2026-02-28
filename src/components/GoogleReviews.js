@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Quote } from 'lucide-react';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://www.pharmadpro.co.uk/api';
+const API_URL = "https://pharmadpro-backend.onrender.com/api";
 
 // Google logo SVG
 const GoogleLogo = () => (
@@ -79,6 +79,25 @@ const GoogleReviews = ({ config }) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
+        // First try the new Google reviews endpoint
+        const googleResponse = await fetch(`${API_URL}/google-reviews/public/approved`);
+        if (googleResponse.ok) {
+          const googleData = await googleResponse.json();
+          if (googleData.reviews && googleData.reviews.length > 0) {
+            const mappedReviews = googleData.reviews.map(r => ({
+              review_id: r.review_id || r.author_name,
+              reviewer_name: r.author_name,
+              review_text: r.text,
+              review_date: r.relative_time || 'Recently',
+              rating: r.rating || 5
+            }));
+            setReviews(mappedReviews);
+            setLoading(false);
+            return;
+          }
+        }
+        
+        // Fallback to pharmacy-admin reviews
         const response = await fetch(`${API_URL}/pharmacy-admin/reviews/public`);
         if (response.ok) {
           const data = await response.json();
