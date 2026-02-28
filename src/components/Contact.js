@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Clock, Navigation } from 'lucide-react';
 export default function Contact({ config }) {
   return (
     <section id="contact" style={{
+      minHeight: '100vh',
       padding: '64px 16px',
       backgroundColor: 'white'
     }}>

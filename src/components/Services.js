@@ -72,6 +72,7 @@ export default function Services({ config }) {
 
   return (
     <section id="services" style={{
+      minHeight: '100vh',
       padding: '64px 16px',
       backgroundColor: '#f0f7f1'
     }}>

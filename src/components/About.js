@@ -4,6 +4,9 @@ import { Heart, Users, Clock, Award, ShieldCheck, Smile } from 'lucide-react';
 export default function About({ config }) {
   return (
     <section id="about" style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
       padding: '80px 16px',
       backgroundColor: '#f8fafc'
     }}>

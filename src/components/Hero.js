@@ -13,7 +13,11 @@ export default function Hero({ config }) {
     <section style={{
       position: 'relative',
       overflow: 'hidden',
-      background: 'linear-gradient(135deg, #1e5631 0%, #2d7a47 50%, #1e5631 100%)'
+      background: 'linear-gradient(135deg, #1e5631 0%, #2d7a47 50%, #1e5631 100%)',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center'
     }}>
       {/* Pattern overlay */}
       <div style={{

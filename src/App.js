@@ -93,13 +93,13 @@ function PageTracker({ trackEvent }) {
 function HomePage({ config, chatOpen, setChatOpen, trackEvent }) {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
-      <ReviewTicker />
       <Header config={config} />
       <Hero config={config} trackEvent={trackEvent} />
       <About config={config} />
       <Services config={config} />
       <GoogleReviews config={config} />
       <Contact config={config} trackEvent={trackEvent} />
+      <ReviewTicker />
       <Footer config={config} />
       <Chatbot 
         config={config}
@@ -123,17 +123,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const { trackEvent } = useAnalytics();
 
-  useEffect(() => {
-    // Scroll to About section on page load for better first impression
-    const scrollTimer = setTimeout(() => {
-      const aboutSection = document.getElementById('about');
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 500);
-    
-    return () => clearTimeout(scrollTimer);
-  }, []);
+  // Removed auto-scroll - let users naturally browse
 
   useEffect(() => {
     // Try to fetch settings from admin panel
