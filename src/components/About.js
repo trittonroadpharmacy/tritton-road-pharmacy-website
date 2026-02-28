@@ -1,81 +1,74 @@
 import React from 'react';
-import { Heart, Users, Clock, Award, ShieldCheck, Smile } from 'lucide-react';
+import { Heart, Users, Clock, ShieldCheck } from 'lucide-react';
 
 export default function About({ config }) {
   return (
     <section id="about" style={{
-      minHeight: '100vh',
+      padding: '40px 16px',
+      backgroundColor: '#f8fafc',
+      height: '100%',
       display: 'flex',
-      alignItems: 'center',
-      padding: '80px 16px',
-      backgroundColor: '#f8fafc'
+      alignItems: 'center'
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+        {/* Section Header - More compact */}
+        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <span style={{
             display: 'inline-block',
             backgroundColor: '#1e563120',
             color: '#1e5631',
-            padding: '8px 16px',
+            padding: '6px 14px',
             borderRadius: '9999px',
-            fontSize: '14px',
+            fontSize: '13px',
             fontWeight: 500,
-            marginBottom: '16px'
+            marginBottom: '12px'
           }}>
             About Us
           </span>
           <h2 style={{
-            fontSize: '2.5rem',
+            fontSize: '2rem',
             fontWeight: 700,
             color: '#0f172a',
-            marginBottom: '16px'
+            marginBottom: '8px'
           }}>
             Your Neighbourhood Pharmacy
           </h2>
           <p style={{
-            fontSize: '1.125rem',
+            fontSize: '1rem',
             color: '#64748b',
             maxWidth: '700px',
             margin: '0 auto',
-            lineHeight: 1.7
+            lineHeight: 1.5
           }}>
             More than just a pharmacy – we're part of your community
           </p>
         </div>
 
-        {/* Main Content */}
+        {/* Main Content - More compact */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '48px',
-          alignItems: 'center'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          alignItems: 'start'
         }}>
           {/* Left - Story */}
           <div>
             <h3 style={{
-              fontSize: '1.5rem',
+              fontSize: '1.25rem',
               fontWeight: 700,
               color: '#1e5631',
-              marginBottom: '20px'
+              marginBottom: '12px'
             }}>
               Where Every Patient Matters
             </h3>
-            <div style={{ color: '#475569', lineHeight: 1.8, fontSize: '16px' }}>
-              <p style={{ marginBottom: '16px' }}>
+            <div style={{ color: '#475569', lineHeight: 1.6, fontSize: '14px' }}>
+              <p style={{ marginBottom: '10px' }}>
                 At <strong>Tritton Road Pharmacy</strong>, we believe healthcare should be personal. 
-                As an independent community pharmacy, we have the freedom to put <em>you</em> first – 
-                not corporate targets or shareholder expectations.
+                As an independent community pharmacy, we put <em>you</em> first.
               </p>
-              <p style={{ marginBottom: '16px' }}>
-                When you visit us, you'll be greeted by familiar faces who remember your name, 
-                understand your health needs, and take the time to listen. We're not here to rush 
-                you out the door – we're here to help you feel better and stay healthy.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                Our pharmacists live and work in Lincoln. We shop at the same Morrisons, 
-                walk the same streets, and care deeply about the wellbeing of our neighbours. 
-                That's the difference an independent pharmacy makes.
+              <p style={{ marginBottom: '10px' }}>
+                When you visit us, you'll be greeted by familiar faces who remember your name 
+                and understand your health needs.
               </p>
               <p style={{ fontWeight: 500, color: '#1e5631' }}>
                 Come in for your prescription, stay for the service you deserve.
@@ -83,72 +76,62 @@ export default function About({ config }) {
             </div>
           </div>
 
-          {/* Right - Values */}
+          {/* Right - Values - More compact */}
           <div style={{
             backgroundColor: 'white',
-            borderRadius: '24px',
-            padding: '32px',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.08)'
+            borderRadius: '16px',
+            padding: '20px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
           }}>
             <h4 style={{
-              fontSize: '1.25rem',
+              fontSize: '1rem',
               fontWeight: 700,
               color: '#0f172a',
-              marginBottom: '24px'
+              marginBottom: '16px'
             }}>
               Why Patients Choose Us
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
                 {
                   icon: Heart,
-                  title: 'Genuinely Personal Care',
-                  desc: 'We know our patients by name, not just by prescription number.'
+                  title: 'Personal Care',
+                  desc: 'We know you by name, not prescription number.'
                 },
                 {
                   icon: Clock,
                   title: 'Time for You',
-                  desc: 'No rushed consultations. We take as long as you need to answer your questions.'
+                  desc: 'No rushed consultations.'
                 },
                 {
                   icon: Users,
                   title: 'Community Focused',
-                  desc: 'Proudly serving Lincoln families – many for years.'
+                  desc: 'Proudly serving Lincoln families.'
                 },
                 {
                   icon: ShieldCheck,
                   title: 'Trusted Expertise',
-                  desc: 'Fully qualified NHS pharmacists with decades of combined experience.'
-                },
-                {
-                  icon: Smile,
-                  title: 'Friendly & Welcoming',
-                  desc: 'A warm smile and a helpful attitude, every single visit.'
-                },
-                {
-                  icon: Award,
-                  title: 'Going the Extra Mile',
-                  desc: 'From medication deliveries to health advice calls – we do what it takes.'
+                  desc: 'Qualified NHS pharmacists.'
                 }
               ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                   <div style={{
-                    width: '44px',
-                    height: '44px',
+                    width: '36px',
+                    height: '36px',
                     backgroundColor: '#1e563115',
-                    borderRadius: '12px',
+                    borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <item.icon size={22} style={{ color: '#1e5631' }} />
+                    <item.icon size={18} style={{ color: '#1e5631' }} />
                   </div>
                   <div>
-                    <h5 style={{ fontWeight: 600, color: '#0f172a', marginBottom: '4px', fontSize: '15px' }}>
+                    <h5 style={{ fontWeight: 600, color: '#0f172a', marginBottom: '2px', fontSize: '13px' }}>
                       {item.title}
                     </h5>
-                    <p style={{ fontSize: '14px', color: '#64748b', margin: 0, lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '12px', color: '#64748b', margin: 0 }}>
                       {item.desc}
                     </p>
                   </div>
@@ -158,29 +141,28 @@ export default function About({ config }) {
           </div>
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA - More compact */}
         <div style={{
-          marginTop: '64px',
+          marginTop: '32px',
           textAlign: 'center',
           backgroundColor: '#1e5631',
-          borderRadius: '24px',
-          padding: '48px 32px',
+          borderRadius: '16px',
+          padding: '24px',
           color: 'white'
         }}>
-          <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '16px' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px' }}>
             Experience the Difference
           </h3>
           <p style={{ 
-            fontSize: '1.125rem', 
+            fontSize: '0.95rem', 
             opacity: 0.9, 
             maxWidth: '600px', 
-            margin: '0 auto 24px',
-            lineHeight: 1.6
+            margin: '0 auto 16px',
+            lineHeight: 1.5
           }}>
-            Whether you need a prescription filled, health advice, or just a friendly chat about 
-            your wellbeing – we're here for you. Pop in and see why our patients keep coming back.
+            Pop in and see why our patients keep coming back.
           </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
               href={`tel:${config.phone}`}
               style={{
@@ -189,11 +171,11 @@ export default function About({ config }) {
                 gap: '8px',
                 backgroundColor: 'white',
                 color: '#1e5631',
-                padding: '14px 28px',
+                padding: '10px 20px',
                 borderRadius: '9999px',
                 fontWeight: 600,
                 textDecoration: 'none',
-                fontSize: '16px'
+                fontSize: '14px'
               }}
             >
               Call Us: {config.phone}
@@ -208,11 +190,11 @@ export default function About({ config }) {
                 gap: '8px',
                 backgroundColor: 'transparent',
                 color: 'white',
-                padding: '14px 28px',
+                padding: '10px 20px',
                 borderRadius: '9999px',
                 fontWeight: 600,
                 textDecoration: 'none',
-                fontSize: '16px',
+                fontSize: '14px',
                 border: '2px solid white'
               }}
             >

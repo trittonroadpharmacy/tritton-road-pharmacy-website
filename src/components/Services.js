@@ -72,9 +72,10 @@ export default function Services({ config }) {
 
   return (
     <section id="services" style={{
-      minHeight: '100vh',
-      padding: '64px 16px',
-      backgroundColor: '#f0f7f1'
+      padding: '40px 16px',
+      backgroundColor: '#f0f7f1',
+      height: '100%',
+      overflow: 'auto'
     }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Section header */}

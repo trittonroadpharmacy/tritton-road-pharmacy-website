@@ -152,16 +152,16 @@ export default function Header({ config }) {
             <nav style={{ display: 'none' }} className="desktop-nav">
               <style>{`@media (min-width: 768px) { .desktop-nav { display: flex !important; } }`}</style>
               <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-                <a href="#services" style={{
-                  color: '#334155',
-                  textDecoration: 'none',
-                  fontWeight: 500
-                }}>Services</a>
                 <a href="#about" style={{
                   color: '#334155',
                   textDecoration: 'none',
                   fontWeight: 500
                 }}>About</a>
+                <a href="#services" style={{
+                  color: '#334155',
+                  textDecoration: 'none',
+                  fontWeight: 500
+                }}>Services</a>
                 <a href="#contact" style={{
                   color: '#334155',
                   textDecoration: 'none',
@@ -212,13 +212,6 @@ export default function Header({ config }) {
           }} className="mobile-menu">
             <style>{`@media (min-width: 768px) { .mobile-menu { display: none !important; } }`}</style>
             <div style={{ padding: '16px' }}>
-              <a href="#services" onClick={() => setMobileMenuOpen(false)} style={{
-                display: 'block',
-                padding: '12px 0',
-                color: '#334155',
-                fontWeight: 500,
-                textDecoration: 'none'
-              }}>Services</a>
               <a href="#about" onClick={() => setMobileMenuOpen(false)} style={{
                 display: 'block',
                 padding: '12px 0',
@@ -226,6 +219,13 @@ export default function Header({ config }) {
                 fontWeight: 500,
                 textDecoration: 'none'
               }}>About</a>
+              <a href="#services" onClick={() => setMobileMenuOpen(false)} style={{
+                display: 'block',
+                padding: '12px 0',
+                color: '#334155',
+                fontWeight: 500,
+                textDecoration: 'none'
+              }}>Services</a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)} style={{
                 display: 'block',
                 padding: '12px 0',

@@ -229,18 +229,33 @@ export default function Chatbot({ config, apiUrl, isOpen, onToggle }) {
     width: '64px',
     height: '64px',
     borderRadius: '50%',
-    boxShadow: '0 10px 15px -3px rgba(0,0,0,0.2)',
+    boxShadow: isOpen ? '0 10px 15px -3px rgba(0,0,0,0.2)' : '0 0 20px rgba(30, 86, 49, 0.6), 0 0 40px rgba(30, 86, 49, 0.4)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     border: 'none',
     cursor: 'pointer',
     transition: 'all 0.3s',
-    backgroundColor: isOpen ? '#ef4444' : '#1e5631'
+    backgroundColor: isOpen ? '#ef4444' : '#1e5631',
+    animation: isOpen ? 'none' : 'chatbotGlow 2s ease-in-out infinite'
   };
 
   return (
     <>
+      {/* Glow animation keyframes */}
+      <style>{`
+        @keyframes chatbotGlow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(30, 86, 49, 0.6), 0 0 40px rgba(30, 86, 49, 0.4);
+            transform: scale(1);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(30, 86, 49, 0.8), 0 0 60px rgba(30, 86, 49, 0.5);
+            transform: scale(1.05);
+          }
+        }
+      `}</style>
+      
       {/* Toggle button */}
       <button onClick={onToggle} style={buttonStyle} data-testid="chatbot-toggle">
         {isOpen ? <X size={28} color="white" /> : <MessageCircle size={28} color="white" />}
@@ -761,24 +776,6 @@ export default function Chatbot({ config, apiUrl, isOpen, onToggle }) {
           )}
         </div>
       )}
-      <style>
-        {`
-          @keyframes pulse-glow {
-            0% {
-              box-shadow: 0 0 0 0 rgba(30, 86, 49, 0.7);
-              transform: scale(1);
-            }
-            50% {
-              box-shadow: 0 0 20px 10px rgba(30, 86, 49, 0.4);
-              transform: scale(1.05);
-            }
-            100% {
-              box-shadow: 0 0 0 0 rgba(30, 86, 49, 0);
-              transform: scale(1);
-            }
-          }
-        `}
-      </style>
     </>
   );
 }

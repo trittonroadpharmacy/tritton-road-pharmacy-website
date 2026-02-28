@@ -89,17 +89,52 @@ function PageTracker({ trackEvent }) {
   return null;
 }
 
-// Home page component
+// Home page component - Each section fills viewport, About comes first, ticker at bottom
 function HomePage({ config, chatOpen, setChatOpen, trackEvent }) {
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
+    <div style={{ backgroundColor: 'white' }}>
       <Header config={config} />
-      <Hero config={config} trackEvent={trackEvent} />
-      <About config={config} />
-      <Services config={config} />
-      <GoogleReviews config={config} />
-      <Contact config={config} trackEvent={trackEvent} />
-      <ReviewTicker />
+      
+      {/* About Section - Landing Page */}
+      <section id="about-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          <About config={config} />
+        </div>
+        <ReviewTicker />
+      </section>
+      
+      {/* Hero Section */}
+      <section id="hero-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          <Hero config={config} trackEvent={trackEvent} />
+        </div>
+        <ReviewTicker />
+      </section>
+      
+      {/* Services Section */}
+      <section id="services-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          <Services config={config} />
+        </div>
+        <ReviewTicker />
+      </section>
+      
+      {/* Reviews Section */}
+      <section id="reviews-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          <GoogleReviews config={config} />
+        </div>
+        <ReviewTicker />
+      </section>
+      
+      {/* Contact Section */}
+      <section id="contact-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          <Contact config={config} trackEvent={trackEvent} />
+        </div>
+        <ReviewTicker />
+      </section>
+      
       <Footer config={config} />
       <Chatbot 
         config={config}
@@ -123,7 +158,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const { trackEvent } = useAnalytics();
 
-  // Removed auto-scroll - let users naturally browse
+  // Removed auto-open chatbot - now just glows to attract attention
 
   useEffect(() => {
     // Try to fetch settings from admin panel
