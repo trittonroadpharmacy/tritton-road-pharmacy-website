@@ -410,6 +410,9 @@ function generateIndexHtml(services) {
       ]
     }
     </script>
+
+    <!-- PharmAdPro Website Analytics -->
+    <script async src="https://pharmadpro-backend.onrender.com/api/website-analytics/tracker.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
