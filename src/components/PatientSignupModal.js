@@ -5,14 +5,16 @@ import { X, User, Phone, Mail, Heart, Loader2, CheckCircle2 } from 'lucide-react
 const API_BASE = process.env.REACT_APP_API_URL || 'https://www.pharmadpro.co.uk/api';
 
 const SERVICE_OPTIONS = [
+  'NHS Electronic Prescription Service (nominate us)',
   'NHS Pharmacy First (free GP-free advice)',
-  'Prescription Services',
+  'Prescription Services & Repeat Prescriptions',
+  'Prescription Delivery',
   'NHS Contraception Service',
   'Flu Vaccination',
   'Blood Pressure Check',
+  'New Medicine Service',
   'Health Advice',
   'Emergency Medicine Supply',
-  'Prescription Delivery',
   'Other / not sure yet'
 ];
 
@@ -29,7 +31,8 @@ export default function PatientSignupModal({ isOpen, onOpen, onClose, autoOpenAf
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [serviceInterest, setServiceInterest] = useState('');
-  const [consent, setConsent] = useState(false);
+  const [consentService, setConsentService] = useState(false);
+  const [consentMarketing, setConsentMarketing] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
@@ -55,6 +58,10 @@ export default function PatientSignupModal({ isOpen, onOpen, onClose, autoOpenAf
   async function handleSubmit(e) {
     e.preventDefault();
     if (submitting) return;
+    if (!consentService) {
+      setError('Please tick the consent box so we can contact you about your enquiry.');
+      return;
+    }
     setError(null);
     setSubmitting(true);
     try {
@@ -63,7 +70,10 @@ export default function PatientSignupModal({ isOpen, onOpen, onClose, autoOpenAf
         phone: phone.trim(),
         email: email.trim() || null,
         service_interest: serviceInterest || null,
-        consent_marketing: consent,
+        consent_marketing: consentMarketing,
+        note: consentService
+          ? 'Patient confirmed consent to data processing for service request and any required NHS notifications.'
+          : null,
         source: 'trittonroadpharmacy.co.uk',
       });
       setSubmitted(true);
@@ -151,14 +161,14 @@ export default function PatientSignupModal({ isOpen, onOpen, onClose, autoOpenAf
           </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
             <Heart size={22} fill="white" stroke="white" />
-            <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 700 }}>
-              {submitted ? "You're all set!" : 'Get Free Health Advice'}
+            <h2 style={{ margin: 0, fontSize: '19px', fontWeight: 700, lineHeight: 1.25 }}>
+              {submitted ? "You're all set!" : 'Sign up to our services including NHS Electronic Prescription Service'}
             </h2>
           </div>
           <p style={{ margin: 0, fontSize: '14px', opacity: 0.92 }}>
             {submitted
-              ? "Thanks — we'll call you within 24 hours."
-              : 'Quick sign-up — our pharmacist will call you back to help.'}
+              ? "Thanks — our expert team member will call you soon to help further."
+              : 'Quick sign-up — our expert team member will call you soon to help further.'}
           </p>
         </div>
 
@@ -229,16 +239,45 @@ export default function PatientSignupModal({ isOpen, onOpen, onClose, autoOpenAf
                 </select>
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '13px', color: '#475569', marginTop: '4px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={consent}
-                  onChange={(e) => setConsent(e.target.checked)}
-                  data-testid="patient-consent-checkbox"
-                  style={{ marginTop: '3px' }}
-                />
-                <span>I'm happy to receive occasional health tips and seasonal reminders from Tritton Road Pharmacy.</span>
-              </label>
+              {/* Comprehensive consent block */}
+              <div style={{
+                background: '#f1f5f9',
+                border: '1px solid #cbd5e1',
+                borderRadius: '10px',
+                padding: '12px 14px',
+                marginTop: '4px',
+              }}>
+                <p style={{ margin: '0 0 10px', fontSize: '12px', fontWeight: 700, color: '#1e293b', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+                  Consent & how we use your details
+                </p>
+
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '13px', color: '#334155', marginBottom: '10px', cursor: 'pointer', lineHeight: 1.45 }}>
+                  <input
+                    type="checkbox"
+                    required
+                    checked={consentService}
+                    onChange={(e) => { setConsentService(e.target.checked); if (e.target.checked) setError(null); }}
+                    data-testid="patient-consent-service"
+                    style={{ marginTop: '3px', flexShrink: 0 }}
+                  />
+                  <span>
+                    <strong>I consent</strong> to Tritton Road Pharmacy storing and using the details above to contact me about my enquiry, register me for the service I've selected (including, where relevant, nominating Tritton Road Pharmacy as my dispenser on the <strong>NHS Electronic Prescription Service</strong>), and to share the minimum information required with the NHS, my GP surgery, or other authorised healthcare professionals to deliver that service. I understand my data will be handled in line with the Data Protection Act 2018, UK GDPR, and NHS confidentiality rules. <span style={{ color: '#dc2626' }}>(required)</span>
+                  </span>
+                </label>
+
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '13px', color: '#334155', cursor: 'pointer', lineHeight: 1.45 }}>
+                  <input
+                    type="checkbox"
+                    checked={consentMarketing}
+                    onChange={(e) => setConsentMarketing(e.target.checked)}
+                    data-testid="patient-consent-marketing"
+                    style={{ marginTop: '3px', flexShrink: 0 }}
+                  />
+                  <span>
+                    I'm happy to receive occasional health tips, seasonal reminders (flu jabs, contraception, blood pressure checks etc.) and service updates from Tritton Road Pharmacy by phone, SMS or email. I can withdraw this consent at any time by replying STOP, emailing the pharmacy, or asking in store. <span style={{ color: '#64748b' }}>(optional)</span>
+                  </span>
+                </label>
+              </div>
 
               {error && (
                 <div style={{
@@ -271,8 +310,8 @@ export default function PatientSignupModal({ isOpen, onOpen, onClose, autoOpenAf
                 {submitting ? <><Loader2 size={16} className="animate-spin" /> Sending…</> : 'Sign Up Now'}
               </button>
 
-              <p style={{ margin: '8px 0 0', fontSize: '11px', color: '#94a3b8', textAlign: 'center' }}>
-                We'll never share your details. By submitting, you agree to be contacted about your enquiry.
+              <p style={{ margin: '8px 0 0', fontSize: '11px', color: '#94a3b8', textAlign: 'center', lineHeight: 1.5 }}>
+                We treat your details confidentially under UK GDPR and NHS confidentiality rules. You can ask us to delete your data at any time by emailing trittonroadpharmacy@gmail.com or calling 01522&nbsp;537145.
               </p>
             </form>
           )}
