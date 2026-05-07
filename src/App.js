@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import CookieConsent from './components/CookieConsent';
 import ReviewTicker from './components/ReviewTicker';
+import PatientSignupModal from './components/PatientSignupModal';
 
 // API URL for backend services
 const API_URL = process.env.REACT_APP_API_URL || 'https://www.pharmadpro.co.uk/api';
@@ -54,6 +55,7 @@ function App() {
   const [chatOpen, setChatOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [activePage, setActivePage] = useState('about');
+  const [signupOpen, setSignupOpen] = useState(false);
 
   useEffect(() => {
     const fetchConfig = async () => {
@@ -125,7 +127,7 @@ function App() {
       backgroundColor: '#f8fafc'
     }}>
       {/* Header with navigation */}
-      <Header config={config} activePage={activePage} setActivePage={setActivePage} />
+      <Header config={config} activePage={activePage} setActivePage={setActivePage} onSignupClick={() => setSignupOpen(true)} />
       
       {/* Persistent Review Ticker - Always visible below header */}
       <ReviewTicker />
@@ -148,6 +150,14 @@ function App() {
       
       {/* Cookie Consent */}
       <CookieConsent />
+
+      {/* Patient sign-up modal — auto-opens after 6s, also triggered by Header button */}
+      <PatientSignupModal
+        isOpen={signupOpen}
+        onOpen={() => setSignupOpen(true)}
+        onClose={() => setSignupOpen(false)}
+        autoOpenAfterMs={6000}
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, Clock, Menu, X } from 'lucide-react';
+import { Phone, MapPin, Clock, Menu, X, UserPlus } from 'lucide-react';
 
-export default function Header({ config, activePage, setActivePage }) {
+export default function Header({ config, activePage, setActivePage, onSignupClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -192,6 +192,32 @@ export default function Header({ config, activePage, setActivePage }) {
                 <Phone size={16} />
                 Call Us
               </a>
+              {onSignupClick && (
+                <button
+                  onClick={onSignupClick}
+                  data-testid="header-signup-btn"
+                  style={{
+                    backgroundColor: '#f59e0b',
+                    color: 'white',
+                    padding: '10px 20px',
+                    borderRadius: '9999px',
+                    fontWeight: 700,
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginLeft: '8px',
+                    boxShadow: '0 4px 12px rgba(245,158,11,0.35)',
+                    transition: 'transform 0.15s, box-shadow 0.15s'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(245,158,11,0.5)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(245,158,11,0.35)'; }}
+                >
+                  <UserPlus size={16} />
+                  Sign Up Now
+                </button>
+              )}
             </nav>
 
             {/* Mobile menu button */}
@@ -257,6 +283,27 @@ export default function Header({ config, activePage, setActivePage }) {
             }}>
               Call {config.phone}
             </a>
+            {onSignupClick && (
+              <button
+                onClick={() => { onSignupClick(); setMobileMenuOpen(false); }}
+                data-testid="mobile-signup-btn"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  backgroundColor: '#f59e0b',
+                  color: 'white',
+                  textAlign: 'center',
+                  padding: '14px',
+                  borderRadius: '8px',
+                  fontWeight: 700,
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginTop: '8px'
+                }}
+              >
+                Sign Up Now — Get Free Health Advice
+              </button>
+            )}
           </div>
         )}
       </header>
