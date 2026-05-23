@@ -10,6 +10,7 @@ import Chatbot from './components/Chatbot';
 import CookieConsent from './components/CookieConsent';
 import ReviewTicker from './components/ReviewTicker';
 import PatientSignupModal from './components/PatientSignupModal';
+import SignupPage from './components/SignupPage';
 
 // API URL for backend services
 const API_URL = process.env.REACT_APP_API_URL || 'https://www.pharmadpro.co.uk/api';
@@ -57,6 +58,10 @@ function App() {
   const [activePage, setActivePage] = useState('about');
   const [signupOpen, setSignupOpen] = useState(false);
 
+  // Detect /signup path — used as a dedicated landing page for social campaigns
+  const isSignupPage = typeof window !== 'undefined' &&
+    (window.location.pathname === '/signup' || window.location.pathname === '/signup/');
+
   useEffect(() => {
     const fetchConfig = async () => {
       try {
@@ -75,8 +80,12 @@ function App() {
 
   // Update page title
   useEffect(() => {
-    document.title = `${config.name} | NHS Pharmacy Services in Lincoln | LN6`;
-  }, [config.name]);
+    if (isSignupPage) {
+      document.title = `Sign Up — NHS Prescriptions & Services | ${config.name}`;
+    } else {
+      document.title = `${config.name} | NHS Pharmacy Services in Lincoln | LN6`;
+    }
+  }, [config.name, isSignupPage]);
 
   if (loading) {
     return (
@@ -105,6 +114,9 @@ function App() {
   }
 
   const renderPage = () => {
+    if (isSignupPage) {
+      return <SignupPage />;
+    }
     switch (activePage) {
       case 'about':
         return <About config={config} />;
@@ -127,7 +139,18 @@ function App() {
       backgroundColor: '#f8fafc'
     }}>
       {/* Header with navigation */}
-      <Header config={config} activePage={activePage} setActivePage={setActivePage} onSignupClick={() => setSignupOpen(true)} />
+      <Header
+        config={config}
+        activePage={activePage}
+        setActivePage={setActivePage}
+        onSignupClick={() => {
+          if (isSignupPage) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            setSignupOpen(true);
+          }
+        }}
+      />
       
       {/* Persistent Review Ticker - Always visible below header */}
       <ReviewTicker />
@@ -151,13 +174,16 @@ function App() {
       {/* Cookie Consent */}
       <CookieConsent />
 
-      {/* Patient sign-up modal — auto-opens after 6s, also triggered by Header button */}
-      <PatientSignupModal
-        isOpen={signupOpen}
-        onOpen={() => setSignupOpen(true)}
-        onClose={() => setSignupOpen(false)}
-        autoOpenAfterMs={6000}
-      />
+      {/* Patient sign-up modal — auto-opens after 6s, also triggered by Header button.
+          Skipped on /signup since the user is already on the full-page form. */}
+      {!isSignupPage && (
+        <PatientSignupModal
+          isOpen={signupOpen}
+          onOpen={() => setSignupOpen(true)}
+          onClose={() => setSignupOpen(false)}
+          autoOpenAfterMs={6000}
+        />
+      )}
     </div>
   );
 }
