@@ -196,9 +196,8 @@ function generateSchemaServices(services) {
 }
 
 function generateMetaDescription(services) {
-  const enabledServices = services.filter(s => s.enabled !== false).slice(0, 4);
-  const serviceNames = enabledServices.map(s => s.name).join(', ');
-  return `${PHARMACY_CONFIG.name} - Your trusted NHS community pharmacy in Lincoln, Lincolnshire (LN6). ${serviceNames}. Serving Lincoln, North Hykeham, South Hykeham, Waddington, Bracebridge Heath, Skellingthorpe, Nettleham, Saxilby, Cherry Willingham, Washingborough, Woodhall Spa, Market Rasen and all villages within 15 miles. Located inside Morrisons, Tritton Road.`;
+  // Keep under 160 chars for optimal Google SERP display
+  return `Tritton Road Pharmacy — NHS pharmacy in Lincoln (LN6). Free prescription delivery to Lincoln & surrounding villages. NHS Pharmacy First, EPS, flu jabs.`;
 }
 
 function generateIndexHtml(services) {
@@ -249,7 +248,7 @@ function generateIndexHtml(services) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>${PHARMACY_CONFIG.name} | NHS Pharmacy Services in ${PHARMACY_CONFIG.address.city}, ${PHARMACY_CONFIG.address.region} | ${PHARMACY_CONFIG.address.postcode.split(' ')[0]}</title>
+    <title>${PHARMACY_CONFIG.name} | NHS Pharmacy & Prescriptions in Lincoln</title>
     
     <!-- Structured Data: Pharmacy (Auto-generated from services) -->
     <script type="application/ld+json">
@@ -278,7 +277,19 @@ function generateIndexHtml(services) {
       "telephone": "${PHARMACY_CONFIG.phone}",
       "email": "${PHARMACY_CONFIG.email}",
       "url": "${PHARMACY_CONFIG.website}",
-      "sameAs": [],
+      "sameAs": [
+        "https://www.google.com/maps/place/?q=place_id:ChIJ_AuFvodaeUgRWzPzQA1bcWA",
+        "https://www.facebook.com/trittonroadpharmacy",
+        "https://www.instagram.com/trittonroadpharmacy",
+        "https://www.nhs.uk/Services/pharmacies/Overview/DefaultView.aspx?id=109876"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.4",
+        "reviewCount": "40",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
@@ -407,6 +418,57 @@ function generateIndexHtml(services) {
             "text": "${PHARMACY_CONFIG.name} is just a short drive from North Hykeham. Located in Morrisons on Tritton Road, Lincoln, we serve North Hykeham and all nearby areas with full NHS pharmacy services."
           }
         }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "${PHARMACY_CONFIG.website}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "${PHARMACY_CONFIG.address.city} Pharmacy",
+          "item": "${PHARMACY_CONFIG.website}/services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "NHS Pharmacy Services",
+          "item": "${PHARMACY_CONFIG.website}/services"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "${PHARMACY_CONFIG.name}",
+      "alternateName": "${PHARMACY_CONFIG.alternateName}",
+      "url": "${PHARMACY_CONFIG.website}",
+      "logo": "${PHARMACY_CONFIG.website}/assets/pharmacy-logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "${PHARMACY_CONFIG.phone}",
+        "contactType": "customer service",
+        "areaServed": "GB",
+        "availableLanguage": ["en-GB"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/trittonroadpharmacy",
+        "https://www.instagram.com/trittonroadpharmacy"
       ]
     }
     </script>
