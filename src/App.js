@@ -59,11 +59,14 @@ function App() {
   const [chatOpen, setChatOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [signupOpen, setSignupOpen] = useState(false);
-  const [routeTick, setRouteTick] = useState(0); // bump on popstate so SPA routes re-render
+  // useReducer(x => x + 1, 0) returns [_, bump]. The bump value is unused
+  // (we never read it) — we only need the rerender it triggers. Using
+  // useReducer here keeps both CRA's CI lint AND modern eslint happy.
+  const [, bumpRoute] = React.useReducer(x => x + 1, 0);
 
   // Re-render whenever the browser URL changes (back / forward / pushState)
   useEffect(() => {
-    const onPop = () => setRouteTick(t => t + 1);
+    const onPop = () => bumpRoute();
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
