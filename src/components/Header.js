@@ -34,10 +34,22 @@ export default function Header({ config, activePage, setActivePage, onSignupClic
     { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
     { id: 'reviews', label: 'Reviews' },
+    { id: 'blog', label: 'Blog' },
     { id: 'contact', label: 'Contact' }
   ];
 
   const handleNavClick = (pageId) => {
+    if (pageId === 'blog') {
+      // Real URL routing for /blog (better SEO + share-able).
+      window.history.pushState({}, '', '/blog');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      setMobileMenuOpen(false);
+      window.scrollTo(0, 0);
+      return;
+    }
+    // setActivePage (from App.js) now drives the real URL via pushState,
+    // which triggers the analytics tracker — so every tab change is logged
+    // as a fresh pageview (fixes the 100% bounce rate bug).
     setActivePage(pageId);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
@@ -158,16 +170,20 @@ export default function Header({ config, activePage, setActivePage, onSignupClic
               <style>{`
                 @media (max-width: 768px) { .desktop-nav { display: none !important; } }
               `}</style>
-              {navItems.map(item => (
+              {navItems.map(item => {
+                const isOnBlogPath = typeof window !== 'undefined' && window.location.pathname.startsWith('/blog');
+                const isActive = item.id === 'blog' ? isOnBlogPath : (activePage === item.id && !isOnBlogPath);
+                return (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
+                  data-testid={`header-nav-${item.id}`}
                   style={{
                     padding: '10px 20px',
                     borderRadius: '8px',
                     border: 'none',
-                    background: activePage === item.id ? '#1e5631' : 'transparent',
-                    color: activePage === item.id ? 'white' : '#334155',
+                    background: isActive ? '#1e5631' : 'transparent',
+                    color: isActive ? 'white' : '#334155',
                     fontWeight: 600,
                     fontSize: '15px',
                     cursor: 'pointer',
@@ -176,7 +192,7 @@ export default function Header({ config, activePage, setActivePage, onSignupClic
                 >
                   {item.label}
                 </button>
-              ))}
+              );})}
               <a href={`tel:${config.phone}`} style={{
                 backgroundColor: '#1e5631',
                 color: 'white',

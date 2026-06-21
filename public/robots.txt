@@ -10,3 +10,5 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://trittonroadpharmacy.co.uk/sitemap.xml
+Sitemap: https://trittonroadpharmacy.co.uk/sitemap-index.xml
+Sitemap: https://www.pharmadpro.co.uk/api/blog/sitemap.xml
